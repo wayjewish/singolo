@@ -1,0 +1,148 @@
+@font-face{
+    font-family: 'Lato';
+    src: url('assets/Lato-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+@font-face{
+    font-family: 'Lato';
+    src: url('assets/Lato-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face{
+    font-family: 'Lato';
+    src: url('assets/Lato-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face{
+    font-family: 'Lato';
+    src: url('assets/Lato-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+
+
+*,::after,::before{box-sizing:inherit}
+html{box-sizing:border-box;-ms-overflow-style:scrollbar}
+body{font-family: Lato, sans-serif;margin: 0;width: 1020px;}
+
+h1, h2, h3, h4, h5, h6, p{margin-top: 0;padding: 0;}
+
+a{text-decoration: none;}
+ul{margin: 0;padding: 0;}
+
+h2{
+    font-size: 30px;
+    font-weight: 900;
+    margin-bottom: 15px;
+    color: #666d89;
+}
+p{
+    font-size: 18px;
+    font-weight: 300;
+    margin-bottom: 15px;
+    line-height: 30px;
+    text-align: justify;
+    color: #767e9e;
+}
+
+.container{width:960px;padding-right:10px;padding-left:10px;margin-right:auto;margin-left:auto}
+
+.row{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-10px;margin-left:-10px}
+
+.col-1,.col-10,.col-11,.col-12,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9{position:relative;width:100%;padding-right:10px;padding-left:10px}
+
+.col-1{-ms-flex:0 0 8.333333%;flex:0 0 8.333333%;max-width:8.333333%}
+.col-2{-ms-flex:0 0 16.666667%;flex:0 0 16.666667%;max-width:16.666667%}
+.col-3{-ms-flex:0 0 25%;flex:0 0 25%;max-width:25%}
+.col-4{-ms-flex:0 0 33.333333%;flex:0 0 33.333333%;max-width:33.333333%}
+.col-5{-ms-flex:0 0 41.666667%;flex:0 0 41.666667%;max-width:41.666667%}
+.col-6{-ms-flex:0 0 50%;flex:0 0 50%;max-width:50%}
+.col-7{-ms-flex:0 0 58.333333%;flex:0 0 58.333333%;max-width:58.333333%}
+.col-8{-ms-flex:0 0 66.666667%;flex:0 0 66.666667%;max-width:66.666667%}
+.col-9{-ms-flex:0 0 75%;flex:0 0 75%;max-width:75%}
+.col-10{-ms-flex:0 0 83.333333%;flex:0 0 83.333333%;max-width:83.333333%}
+.col-11{-ms-flex:0 0 91.666667%;flex:0 0 91.666667%;max-width:91.666667%}
+.col-12{-ms-flex:0 0 100%;flex:0 0 100%;max-width:100%}
+
+/*---------------------------------------------------------------*/
+
+.portfolio{
+    background: #2d303a;
+    height: 869px;
+    border-bottom: 6px solid #323746;
+    padding-top: 60px;
+}
+.portfolio h2{margin-bottom: 17px;}
+.portfolio p{margin-bottom: 11px;}
+
+.wrap-buttons{
+    position: relative;
+    left: 1px;
+
+    margin: 0 0 19px;
+}
+.wrap-buttons button{
+    background: none;
+    border: 1px solid #666d89;
+    border-radius: 5px;
+    color: #767e9e;
+    font-size: 12px;
+    line-height: 20px;
+    padding: 0 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    outline: none;
+
+    transition: color .2s ease-in-out;
+    -webkit-transition: color .2s ease-in-out;
+    -moz-transition: color .2s ease-in-out;
+    -o-transition: color .2s ease-in-out;
+}
+.wrap-buttons button.active, .wrap-buttons button:hover{
+    border: 1px solid #c5c5c5;
+    color: #dedede;
+}
+.wrap-buttons button:nth-child(1){width: 29px;}
+
+.art-list img {margin-bottom: 17px;}
+.art-list div:nth-child(n+13 ){display: none;}
+
+/*---------------------------------------------------------------*/
+
+.about{
+    background: #f2f2f2;
+    height: 730px;
+    border-bottom: 6px solid #fff;
+    padding-top: 59px;
+}
+.about h2{margin-bottom: 18px;}
+
+.team{margin-top: 45px;}
+.team__img{margin-bottom: 12px;}
+.team__item:nth-child(2) .team__img img{position: relative;left: -1px;}
+
+.team__name{
+    font-size: 18px;
+    font-weight: 900;
+    color: #666d89;
+    margin-bottom: 8px;
+    white-space: nowrap;
+
+    position: relative;right: 1px;/*текст также гуляет в макете*/
+}
+.team__descr{
+    font-size: 12px;
+    line-height: 21px;
+    color: #767e9e;
+    margin-bottom: 24px;
+    text-align: justify;
+}
+.team__item:nth-child(1) .team__descr{margin: 0 -3px 24px -1px;}
+.team__social{margin: 0;}
+.team__item:nth-child(1) .team__social{position: relative;left: 1px;}
+.team__social a{margin-right: 8px;}
+
