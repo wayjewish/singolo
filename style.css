@@ -213,6 +213,8 @@ h1{width: 0;height: 0;opacity: 0;margin: 0;padding: 0;}
 	line-height: 21px;
 	text-align: justify;
 	color: #767e9e;
+	height: 63px;
+    overflow: hidden;
 }
 
 /*---------------------------------------------------------------*/
@@ -278,6 +280,7 @@ h1{width: 0;height: 0;opacity: 0;margin: 0;padding: 0;}
 	color: #666d89;
 	margin-bottom: 8px;
 	white-space: nowrap;
+	overflow: hidden;
 
 	position: relative;right: 1px;/*текст также гуляет в макете*/
 }
