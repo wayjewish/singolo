@@ -136,7 +136,7 @@ p{
 	color: #f06c64;
 }
 
-h1{display: none;}
+h1{width: 0;height: 0;opacity: 0;margin: 0;padding: 0;}
 
 /*---------------------------------------------------------------*/
 
