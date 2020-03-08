@@ -333,7 +333,7 @@ textarea.contact-form__item{
 	height: 202px;
 	resize: none;
 }
-input[type="submit"].contact-form__item{display: none;}
+input[type="submit"].contact-form__item{/*display: none;*/}
 
 .contact-info{margin-top: -2px;}
 .contact-info h3{
