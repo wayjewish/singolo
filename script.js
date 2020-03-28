@@ -1,21 +1,67 @@
+//
+//this.parentElement.classList.add("active");
+
+
+
 document.addEventListener('DOMContentLoaded', function(){
+	let menu_icon = document.querySelector(".menu-icon");
+	menu_icon.addEventListener('click', function(e) {
+		this.classList.toggle("active");
+		document.querySelector(".header").classList.toggle("active");
+	});
+
+	/*--------------------------------------------------------------*/
+
 	let menu_list = document.querySelectorAll('.menu__list a');
+	let header_height = document.querySelector("header").getBoundingClientRect().height;
+
+	let coordinates_sections = [];
+
 	for (let menu_elem of menu_list) {
+
+		let section = document.querySelector(menu_elem.href.replace(/[^#]*(.*)/, '$1'));
+
+		menu_elem['sectionTop'] = section.getBoundingClientRect().top + window.pageYOffset;
+		//menu_elem['sectionBot'] = menu_elem['sectionTop'] + section.getBoundingClientRect().height;
+
 		menu_elem.addEventListener('click', function(e) {
 			e.preventDefault();
 
-			document.querySelector('.menu__list .active').classList.remove("active");
-			this.parentElement.classList.add("active");
+			menu_icon.classList.remove("active");
+			document.querySelector(".header.active").classList.remove("active");
 
-			let section = document.getElementById(this.getAttribute('handle'));
-			section.scrollIntoView({
-				block: "start",
-				behavior: "smooth"
-			});
+			let w = window.pageYOffset;//текущее положение 
+			let top_section = section.getBoundingClientRect().top - header_height;//координаты блока
+			let start = null;
 
-			return false;
+			requestAnimationFrame(step);
+
+			function step(time) {
+			    if (start === null) start = time;
+
+			    let progress = time - start;
+			    let differences = (top_section < 0 ? Math.max(w - progress, w + top_section) : Math.min(w + progress, w + top_section));
+
+			    window.scrollTo(0,differences);
+
+			    if (differences != w + top_section) requestAnimationFrame(step);
+			}
 		});
 	}
+
+	window.addEventListener('scroll', function() {
+		let active_elem;
+
+		for (let menu_elem of menu_list) {
+			if (window.pageYOffset + header_height >= menu_elem['sectionTop']){
+				active_elem = menu_elem;
+			}
+		}
+		if (active_elem == undefined) active_elem = menu_list[0];
+
+		document.querySelector('.menu__list .active').classList.remove("active");
+		active_elem.parentElement.classList.add("active");
+	});
 
 	/*--------------------------------------------------------------*/
 
@@ -29,10 +75,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
 			let activeSlide = document.querySelector('.slider__slide.active')
 			let prevSlide = activeSlide.previousElementSibling;
+			if (prevSlide == null) prevSlide = document.querySelector('.slider__list').lastElementChild;
 
-			if (prevSlide == null) {
-				prevSlide = document.querySelector('.slider__list').lastElementChild;
-			}
+			document.querySelector("#slider").setAttribute("slide", prevSlide.getAttribute('slide'));
 
 			prevSlide.classList.add("pos-left");
 
@@ -61,10 +106,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
 			let activeSlide = document.querySelector('.slider__slide.active')
 			let nextSlide = activeSlide.nextElementSibling;
+			if (nextSlide == null) nextSlide = document.querySelector('.slider__list').firstElementChild;
 
-			if (nextSlide == null) {
-				nextSlide = document.querySelector('.slider__list').firstElementChild;
-			}
+			document.querySelector("#slider").setAttribute("slide", nextSlide.getAttribute('slide'));
 
 			activeSlide.classList.add("to-left");
 			nextSlide.classList.add("at-right");
@@ -96,6 +140,11 @@ document.addEventListener('DOMContentLoaded', function(){
 	/*--------------------------------------------------------------*/
 
 	let filter_buttons = document.querySelectorAll('.filter-buttons button');
+	let wrap_projects = document.querySelector('.art-list');
+	let projects = document.querySelectorAll('.art-list__item');
+
+	console.log(projects);
+
 	for (let button of filter_buttons) {
 		button.addEventListener('click', function() {
 			let filter = this.getAttribute('filter');
@@ -103,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			document.querySelector('.filter-buttons button.active').classList.remove("active");
 			this.classList.add("active");
 
-			if (filter == 0) {
+			/*if (filter == 0) {
 				let items = document.querySelectorAll('.art-list__item.hide');
 				for (let item of items) {
 					item.classList.remove("hide");
@@ -117,18 +166,43 @@ document.addEventListener('DOMContentLoaded', function(){
 						item.classList.add("hide");
 					}
 				}
+			}*/
+
+			let wrap_projects_html = "";
+			wrap_projects.innerHTML = "";
+			if (filter == 0) {
+				for (let project of projects) {
+					wrap_projects_html += project.outerHTML;
+				}
+				wrap_projects.innerHTML  = wrap_projects_html;
+
+				initArtList();
+			}else{
+				for (let project of projects) {
+					if (project.getAttribute('filter') == filter) {
+						wrap_projects_html += project.outerHTML;
+					}
+				}
+				wrap_projects.innerHTML  = wrap_projects_html;
+
+				initArtList();
 			}
 		});
 	}
 
-	let art_list_img = document.querySelectorAll('.art-list__item img');
-	for (let img of art_list_img) {
-		img.addEventListener('click', function() {
-			if (document.querySelector('.art-list__item img.border')){
-				document.querySelector('.art-list__item img.border').classList.remove("border");
-			}
-			this.classList.add("border");
-		});
+	/*--------------------------------------------------------------*/
+
+	initArtList();
+	function initArtList() {
+		let art_list_img = document.querySelectorAll('.art-list__item img');
+		for (let img of art_list_img) {
+			img.addEventListener('click', function() {
+				if (document.querySelector('.art-list__item img.border')){
+					document.querySelector('.art-list__item img.border').classList.remove("border");
+				}
+				this.classList.add("border");
+			});
+		}
 	}
 
 	/*--------------------------------------------------------------*/
@@ -171,6 +245,11 @@ document.addEventListener('DOMContentLoaded', function(){
 			document.getElementById("contacts").append(data_block);
 			document.querySelector(".pop-up").append(data_btn);
 
+			form.querySelector('input[name="name"]').value = "";
+			form.querySelector('input[name="email"]').value = "";
+			form.querySelector('input[name="subject"]').value = "";
+			form.querySelector('textarea[name="message"]').value = "";
+
 			data_btn.addEventListener('click', function() {
 				data_block.remove();
 				show_form = false;
@@ -179,6 +258,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		return false;
 	});
+	
 });
 
 
