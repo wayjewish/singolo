@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			e.preventDefault();
 
 			menu_icon.classList.remove("active");
-			document.querySelector(".header.active").classList.remove("active");
+			document.querySelector(".header").classList.remove("active");
 
 			let w = window.pageYOffset;//текущее положение 
 			let top_section = section.getBoundingClientRect().top - header_height;//координаты блока
