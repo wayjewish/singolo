@@ -548,6 +548,7 @@ input[type="submit"].contact-form__item{
 }
 
 .menu-icon{
+	display: none;
 	position: fixed;
     top: 25px;
     left: 20px;
@@ -674,6 +675,7 @@ input[type="submit"].contact-form__item{
 	.menu__list li{font-size: 24px;margin-bottom: 25px;}
 	.menu__list li:before{display: none;}
 
+	.menu-icon{display: block;}
 	.header-mobile{display: flex;}
 
 }

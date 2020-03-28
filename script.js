@@ -1,8 +1,3 @@
-//
-//this.parentElement.classList.add("active");
-
-
-
 document.addEventListener('DOMContentLoaded', function(){
 	let menu_icon = document.querySelector(".menu-icon");
 	menu_icon.addEventListener('click', function(e) {
